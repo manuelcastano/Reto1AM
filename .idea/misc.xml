@@ -3,7 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+<<<<<<< HEAD
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.15070921985815602" />
+=======
+        <entry key="..\:/Users/manue/Documents/AplicacionesMoviles/Reto1/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/manue/Documents/AplicacionesMoviles/Reto1/app/src/main/res/layout/fragment_mapa.xml" value="0.12273550724637682" />
+        <entry key="..\:/Users/manue/Documents/AplicacionesMoviles/Reto1/app/src/main/res/menu/home_menu.xml" value="0.1796875" />
+>>>>>>> 2aa34d7976d452f50756f3b2eafeb798c2a37c56
       </map>
     </option>
   </component>
