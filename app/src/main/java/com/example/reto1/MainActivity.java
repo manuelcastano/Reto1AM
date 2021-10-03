@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PerfilFragment.OnEditFragment {
 
     private PerfilFragment perfilFragment;
     private PublicacionesFragment publicacionesFragment;
@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         perfilFragment = PerfilFragment.newInstance();
         publicacionesFragment = PublicacionesFragment.newInstance();
         mapaFragment = MapaFragment.newInstance();
+
+        perfilFragment.setListener(this);
+
 
         showFragment(perfilFragment);
 
@@ -48,5 +51,13 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.fragmentContainer, fragment);
         transaction.commit();
+    }
+
+    @Override
+    public void onEditFragment() {
+
+      EditProfileFragment editProfileFragment = EditProfileFragment.newInstance();
+      showFragment(editProfileFragment);
+
     }
 }

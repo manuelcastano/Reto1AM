@@ -3,22 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/contrainstTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="5dp"
+        android:background="@drawable/padding_containers"
         android:padding="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView">
+        app:layout_constraintTop_toBottomOf="@+id/imageProfile">
 
         <TextView
-            android:id="@+id/titleNeg"
+            android:id="@+id/titlePro"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="73dp"
@@ -40,29 +43,31 @@
             android:layout_marginStart="16dp"
             android:background="@color/white"
             android:src="@drawable/pencil"
-            app:layout_constraintBottom_toBottomOf="@+id/titleNeg"
-            app:layout_constraintStart_toEndOf="@+id/titleNeg"
-            app:layout_constraintTop_toTopOf="@+id/titleNeg"
+            app:layout_constraintBottom_toBottomOf="@+id/titlePro"
+            app:layout_constraintStart_toEndOf="@+id/titlePro"
+            app:layout_constraintTop_toTopOf="@+id/titlePro"
             app:layout_constraintVertical_bias="0.705"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
-            android:id="@+id/descriptionNeg"
+            android:id="@+id/descriptionPro"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="22dp"
             android:fontFamily="@font/roboto_regular"
             android:text="Inserte aquí una descripción apropiada para su negocio. El autor de las publicaciones que haga en el fragmento “publicaciones” será negocio que se registre en este fragment"
             android:textAlignment="center"
+            android:textColor="@color/black"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleNeg" />
+            app:layout_constraintTop_toBottomOf="@+id/titlePro" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageProfile"
         android:layout_width="411dp"
         android:layout_height="237dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -8,12 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.reto1.databinding.FragmentPerfilBinding;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PerfilFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class PerfilFragment extends Fragment {
+
+
+    private FragmentPerfilBinding binding;
+    private OnEditFragment listener;
 
 
     public PerfilFragment() {
@@ -31,6 +37,25 @@ public class PerfilFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_perfil, container, false);
+        binding = FragmentPerfilBinding.inflate(inflater,container,false);
+        View view = binding.getRoot();
+
+        binding.editBtn.setOnClickListener(v->{
+
+            listener.onEditFragment();
+
+        });
+
+
+
+        return view;
+    }
+
+    public void setListener(OnEditFragment listener) {
+        this.listener = listener;
+    }
+
+    public interface OnEditFragment{
+        void onEditFragment();
     }
 }
