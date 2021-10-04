@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
 
         perfilFragment.setListener(this);
         editProfileFragment.setListener(this);
-
+        publicacionesFragment.setListener(this);
         showFragment(perfilFragment);
 
         navigator.setOnItemSelectedListener(
@@ -56,10 +56,7 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
 
     @Override
     public void onEditFragment() {
-
-
         showFragment(editProfileFragment);
-
     }
 
     @Override
@@ -69,9 +66,7 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
 
     @Override
     public void onProfile(Profile profile) {
-
         perfilFragment.setProfile(profile);
         showFragment(perfilFragment);
-
     }
 }
