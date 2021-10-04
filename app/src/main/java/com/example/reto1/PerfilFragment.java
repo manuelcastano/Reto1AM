@@ -1,5 +1,7 @@
 package com.example.reto1;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -28,7 +30,7 @@ public class PerfilFragment extends Fragment {
 
     public PerfilFragment() {
         // Required empty public constructor
-        profile= new Profile("Negocio por defecto","Inserte aquí una descripción apropiada para su negocio. El autor de las publicaciones que haga en el fragmento “publicaciones” será negocio que se registre en este fragment");
+        profile= new Profile("Negocio por defecto","Inserte aquí una descripción apropiada para su negocio. El autor de las publicaciones que haga en el fragmento “publicaciones” será negocio que se registre en este fragment",null);
     }
 
     public static PerfilFragment newInstance() {
@@ -49,7 +51,6 @@ public class PerfilFragment extends Fragment {
         binding = FragmentPerfilBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
 
-
         binding.editBtn.setOnClickListener(v->{
 
             listener.onEditFragment();
@@ -57,10 +58,16 @@ public class PerfilFragment extends Fragment {
         });
 
        //  recreamos el fragemento
-
         binding.titlePro.setText(profile.getTitle());
         binding.descriptionPro.setText(profile.getDescription());
 
+        /*if(profile.getFile()!= null) {
+            Bitmap bitmap = BitmapFactory.decodeFile(profile.getFile().getPath());
+            binding.imageProfile.setImageBitmap(bitmap);
+        }*/
+        if (profile.getUri() != null){
+            binding.imageProfile.setImageURI(profile.getUri());
+        }
 
         return view;
     }

@@ -1,24 +1,49 @@
 package com.example.reto1;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.reto1.databinding.FragmentPerfilEditBinding;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link EditProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.io.File;
+
+
 public class EditProfileFragment extends Fragment {
 
     private FragmentPerfilEditBinding binding;
     private OnProfile listener;
+    private ImageButton imgEditBtn;
+    private File file;
+    private Uri uri;
+    private View view;
+
+
+
+
+
+    //lo utilizamos cuando queremos respuesta de la actividad que lanzamos
+    private ActivityResultLauncher<Intent> desicion;
+    private ActivityResultLauncher<Intent> cameralauncher;
+    private ActivityResultLauncher<Intent> galerialauncher;
 
 
 
@@ -37,28 +62,100 @@ public class EditProfileFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        desicion = registerForActivityResult(new StartActivityForResult(),this::onDesicionResult);
+        cameralauncher = registerForActivityResult(new StartActivityForResult(),this::onCameraResult);
+        galerialauncher = registerForActivityResult(new StartActivityForResult(),this::onGalleryResult);
+
 
         binding = FragmentPerfilEditBinding.inflate(inflater, container, false);
-        View view = binding.getRoot();
+        view = binding.getRoot();
+        imgEditBtn = binding.imgEditBtn;
 
+        imgEditBtn.setOnClickListener(this::desicion);
+
+        if(uri!=null){
+            imgEditBtn.setImageURI(uri);
+        }
         binding.editInfoBtn.setOnClickListener(v->{
 
             String title = binding.titleNeg.getText().toString();
             String description = binding.descripcionText.getText().toString();
-            Profile profile = new Profile(title,description);
+
+            Profile profile = new Profile(title,description,uri);
+
             listener.onProfile(profile);
-
-
 
         });
 
         return view;
+    }
+
+
+
+    private void desicion(View view) {
+        Intent intent = new Intent(getContext(),DesicionFoto.class);
+        desicion.launch(intent);
+    }
+
+    private void onDesicionResult(ActivityResult result){
+        //0 camara 1 galeria
+        if(result.getResultCode() == RESULT_OK){
+            if(result.getData().getExtras().getInt("select") == 0){
+                openCamera(view);
+            }else{
+                openGallery(view);
+            }
+        }
+
+    }
+
+    private void openGallery(View view) {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        galerialauncher.launch(intent);
+    }
+    private  void onGalleryResult(ActivityResult result) {
+        if(result.getResultCode() == RESULT_OK){
+          uri = result.getData().getData();
+          imgEditBtn.setImageURI(uri);
+        }
+    }
+
+
+    private void openCamera(View view) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        file = new File(getContext().getExternalFilesDir(null)+"/photo.png");
+
+        //File -> Uri
+        Uri uri = FileProvider.getUriForFile(getContext(),getContext().getPackageName(),file);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
+        cameralauncher.launch(intent);
+
+    }
+    private void onCameraResult(ActivityResult result) {
+        if( result.getResultCode()  == RESULT_OK){
+           //para la foto pequena THUMBNAIL
+          //Bitmap bitmap = (Bitmap) result.getData().getExtras().get("data");
+          //imgEditBtn.setImageBitmap(bitmap);
+            //para carga la foto completa
+            Bitmap  bitmap = BitmapFactory.decodeFile(file.getPath());
+
+            //97dp,68dp
+            //thumbnail = Bitmap.createScaledBitmap(bitmap,bitmap.getWidth()/4,bitmap.getHeight()/4,true);
+            uri = FileProvider.getUriForFile(getContext(),getContext().getPackageName(),file);
+            imgEditBtn.setImageURI(uri);
+           // imgEditBtn.setImageBitmap(thumbnail);
+
+        }else if (result.getResultCode()  == RESULT_CANCELED){
+            Toast.makeText(getContext(),"Operacion cancelada",Toast.LENGTH_LONG).show();
+        }
     }
 
     public void setListener(OnProfile listener) {
