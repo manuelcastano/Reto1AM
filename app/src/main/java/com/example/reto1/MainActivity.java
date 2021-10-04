@@ -9,11 +9,12 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements PerfilFragment.OnEditFragment {
+public class MainActivity extends AppCompatActivity implements PerfilFragment.OnEditFragment,PublicacionesFragment.OnAddPublicacion,EditProfileFragment.OnProfile {
 
     private PerfilFragment perfilFragment;
     private PublicacionesFragment publicacionesFragment;
     private MapaFragment mapaFragment;
+    private EditProfileFragment editProfileFragment;
     private BottomNavigationView navigator;
 
     @Override
@@ -22,13 +23,13 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
         setContentView(R.layout.activity_main);
 
         navigator = findViewById(R.id.navigator);
-
+        editProfileFragment = EditProfileFragment.newInstance();
         perfilFragment = PerfilFragment.newInstance();
         publicacionesFragment = PublicacionesFragment.newInstance();
         mapaFragment = MapaFragment.newInstance();
 
         perfilFragment.setListener(this);
-
+        editProfileFragment.setListener(this);
 
         showFragment(perfilFragment);
 
@@ -56,8 +57,21 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
     @Override
     public void onEditFragment() {
 
-      EditProfileFragment editProfileFragment = EditProfileFragment.newInstance();
-      showFragment(editProfileFragment);
+
+        showFragment(editProfileFragment);
+
+    }
+
+    @Override
+    public void addPublicacion(AddPublicacionFragment fragment) {
+        showFragment(fragment);
+    }
+
+    @Override
+    public void onProfile(Profile profile) {
+
+        perfilFragment.setProfile(profile);
+        showFragment(perfilFragment);
 
     }
 }

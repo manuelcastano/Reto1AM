@@ -18,6 +18,8 @@ import com.example.reto1.databinding.FragmentPerfilEditBinding;
 public class EditProfileFragment extends Fragment {
 
     private FragmentPerfilEditBinding binding;
+    private OnProfile listener;
+
 
 
     public EditProfileFragment() {
@@ -45,6 +47,27 @@ public class EditProfileFragment extends Fragment {
         binding = FragmentPerfilEditBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        binding.editInfoBtn.setOnClickListener(v->{
+
+            String title = binding.titleNeg.getText().toString();
+            String description = binding.descripcionText.getText().toString();
+            Profile profile = new Profile(title,description);
+            listener.onProfile(profile);
+
+
+
+        });
+
         return view;
     }
+
+    public void setListener(OnProfile listener) {
+        this.listener = listener;
+    }
+
+    public interface OnProfile{
+        void onProfile(Profile profile);
+    }
+
+
 }

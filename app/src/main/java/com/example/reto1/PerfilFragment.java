@@ -21,9 +21,14 @@ public class PerfilFragment extends Fragment {
     private FragmentPerfilBinding binding;
     private OnEditFragment listener;
 
+    //State
+    private Profile profile;
+
+
 
     public PerfilFragment() {
         // Required empty public constructor
+        profile= new Profile("Negocio por defecto","Inserte aquí una descripción apropiada para su negocio. El autor de las publicaciones que haga en el fragmento “publicaciones” será negocio que se registre en este fragment");
     }
 
     public static PerfilFragment newInstance() {
@@ -33,6 +38,10 @@ public class PerfilFragment extends Fragment {
         return fragment;
     }
 
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,12 +49,17 @@ public class PerfilFragment extends Fragment {
         binding = FragmentPerfilBinding.inflate(inflater,container,false);
         View view = binding.getRoot();
 
+
         binding.editBtn.setOnClickListener(v->{
 
             listener.onEditFragment();
 
         });
 
+       //  recreamos el fragemento
+
+        binding.titlePro.setText(profile.getTitle());
+        binding.descriptionPro.setText(profile.getDescription());
 
 
         return view;
