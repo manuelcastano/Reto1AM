@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.reto1">
+    <!-- Permisos normales solo se declaran en el manifest ejemplo internet -->
+    <!-- Permisos peligrosos se declaran y se le muestra al usuario como el acceso a la camara o galeria -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -10,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Reto1">
         <activity
-            android:name=".MainActivity"
+            android:name=".DesicionFoto"
+            android:exported="true" />
+        <activity
+            android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,6 +25,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"></activity> <!-- para la camara, la foto completa -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.reto1"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths" />
+        </provider>
     </application>
 
 </manifest>
