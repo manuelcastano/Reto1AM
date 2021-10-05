@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -78,8 +78,8 @@
 
             <ImageButton
                 android:id="@+id/imageButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="69dp"
+                android:layout_height="58dp"
                 android:layout_marginStart="150dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="150dp"
@@ -135,30 +135,34 @@
             <EditText
                 android:id="@+id/editTextDate"
                 android:layout_width="123dp"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="32dp"
                 android:background="@drawable/padding_edittext"
                 android:ems="10"
-                android:inputType="date"
-                android:text="Inicio"
+                android:hint="Inicio"
+                android:inputType="text"
                 android:textAlignment="center"
+                android:textColorHint="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editTextDate2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <EditText
                 android:id="@+id/editTextDate2"
                 android:layout_width="123dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="32dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
                 android:layout_marginEnd="32dp"
                 android:background="@drawable/padding_edittext"
                 android:ems="10"
-                android:inputType="date"
-                android:text="Fin"
+                android:hint="Fin"
+                android:inputType="text"
                 android:textAlignment="center"
+                android:textColorHint="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/editTextDate"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/editTextDate"
@@ -172,11 +176,13 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/estilobotones"
             android:text="Crear"
             android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</ScrollView>
