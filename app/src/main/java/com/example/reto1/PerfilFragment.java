@@ -26,7 +26,9 @@ public class PerfilFragment extends Fragment {
     //State
     private Profile profile;
 
-
+    public Profile getProfile() {
+        return profile;
+    }
 
     public PerfilFragment() {
         // Required empty public constructor

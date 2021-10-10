@@ -35,7 +35,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName1"
+                android:id="@+id/nameET"
                 android:layout_width="210dp"
                 android:layout_height="28dp"
                 android:layout_marginStart="42dp"
@@ -77,7 +77,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/ubicacionBtn"
                 android:layout_width="69dp"
                 android:layout_height="58dp"
                 android:layout_marginStart="150dp"
@@ -94,16 +94,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginBottom="16dp"
                 android:text="Sin ubicación seleccionada"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageButton" />
+                app:layout_constraintTop_toBottomOf="@+id/ubicacionBtn" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -133,7 +133,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/editTextDate"
+                android:id="@+id/inicioET"
                 android:layout_width="123dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
@@ -147,12 +147,12 @@
                 android:textAlignment="center"
                 android:textColorHint="@color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/editTextDate2"
+                app:layout_constraintEnd_toStartOf="@+id/finET"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
             <EditText
-                android:id="@+id/editTextDate2"
+                android:id="@+id/finET"
                 android:layout_width="123dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -163,14 +163,14 @@
                 android:inputType="text"
                 android:textAlignment="center"
                 android:textColorHint="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/editTextDate"
+                app:layout_constraintBottom_toBottomOf="@+id/inicioET"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/editTextDate"
-                app:layout_constraintTop_toTopOf="@+id/editTextDate" />
+                app:layout_constraintStart_toEndOf="@+id/inicioET"
+                app:layout_constraintTop_toTopOf="@+id/inicioET" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/crearBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"

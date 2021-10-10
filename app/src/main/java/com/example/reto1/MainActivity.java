@@ -9,7 +9,7 @@ import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class MainActivity extends AppCompatActivity implements PerfilFragment.OnEditFragment,PublicacionesFragment.OnAddPublicacion,EditProfileFragment.OnProfile {
+public class MainActivity extends AppCompatActivity implements PerfilFragment.OnEditFragment,PublicacionesFragment.OnAddPublicacion,EditProfileFragment.OnProfile, AddPublicacionFragment.OnEvento {
 
     private PerfilFragment perfilFragment;
     private PublicacionesFragment publicacionesFragment;
@@ -68,5 +68,13 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
     public void onProfile(Profile profile) {
         perfilFragment.setProfile(profile);
         showFragment(perfilFragment);
+    }
+
+    @Override
+    public void onEvento(Evento evento) {
+        evento.setCompañia(perfilFragment.getProfile().getTitle());
+        evento.setUri(perfilFragment.getProfile().getUri());
+        publicacionesFragment.addEvento(evento);
+        showFragment(publicacionesFragment);
     }
 }

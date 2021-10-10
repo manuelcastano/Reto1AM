@@ -50,6 +50,10 @@ public class PublicacionesFragment extends Fragment {
         return view;
     }
 
+    public void addEvento(Evento evento) {
+
+    }
+
     public interface OnAddPublicacion{
         public void addPublicacion(AddPublicacionFragment fragment);
     }
