@@ -16,7 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 /**
@@ -29,9 +31,10 @@ public class AddPublicacionFragment extends Fragment {
     private ActivityResultLauncher<Intent> ubicacion;
     private ImageButton ubicacionBtn;
     private Button crearBtn;
-    private Marker ubicacionEvento;
+    private LatLng ubicacionEvento;
     private OnEvento listener;
     private EditText nameET, inicioET, finET;
+    private TextView hayUbicacionTV;
 
     public AddPublicacionFragment() {
         // Required empty public constructor
@@ -60,6 +63,7 @@ public class AddPublicacionFragment extends Fragment {
         nameET = view.findViewById(R.id.nameET);
         inicioET = view.findViewById(R.id.inicioET);
         finET = view.findViewById(R.id.finET);
+        hayUbicacionTV = view.findViewById(R.id.hayUbicacionTV);
         crearBtn.setOnClickListener(
                 (v)->{
                     String name = nameET.getText().toString();
@@ -84,7 +88,8 @@ public class AddPublicacionFragment extends Fragment {
 
     private void onUbicacionResult(ActivityResult result) {
         if(result.getResultCode() == RESULT_OK){
-            ubicacionEvento = result.getData().getExtras().getParcelable("ubicacion");
+            ubicacionEvento = (LatLng) result.getData().getExtras().get("ubicacion");
+            hayUbicacionTV.setText("Ubicacion seleccionada");
         }
     }
 

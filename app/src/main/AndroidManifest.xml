@@ -8,6 +8,7 @@
          location permissions for the "MyLocation" functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!-- Permisos normales solo se declaran en el manifest ejemplo internet -->
     <!-- Permisos peligrosos se declaran y se le muestra al usuario como el acceso a la camara o galeria -->

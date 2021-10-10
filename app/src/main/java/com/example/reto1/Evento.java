@@ -2,6 +2,7 @@ package com.example.reto1;
 
 import android.net.Uri;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
 public class Evento {
@@ -10,10 +11,10 @@ public class Evento {
     private String nombreEvento;
     private String inicio;
     private String fin;
-    private Marker ubicacion;
+    private LatLng ubicacion;
     private Uri uri;
 
-    public Evento(String compañia, String nombreEvento, String inicio, String fin, Marker ubicacion, Uri uri) {
+    public Evento(String compañia, String nombreEvento, String inicio, String fin, LatLng ubicacion, Uri uri) {
         this.compañia = compañia;
         this.nombreEvento = nombreEvento;
         this.inicio = inicio;
@@ -57,11 +58,11 @@ public class Evento {
         this.fin = fin;
     }
 
-    public Marker getUbicacion() {
+    public LatLng getUbicacion() {
         return ubicacion;
     }
 
-    public void setUbicacion(Marker ubicacion) {
+    public void setUbicacion(LatLng ubicacion) {
         this.ubicacion = ubicacion;
     }
 
