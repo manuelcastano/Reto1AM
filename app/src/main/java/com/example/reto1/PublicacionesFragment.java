@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +19,16 @@ import android.widget.Button;
  */
 public class PublicacionesFragment extends Fragment {
 
-    private Button addBtn;
+    private Button addBtn, addBtn2;
     private ConstraintLayout noPublicaciones;
     private OnAddPublicacion listener;
     private AddPublicacionFragment fragment;
+    private RecyclerView publicacionesRecycler;
+    private LinearLayoutManager manager;
+    private EventoAdapter adapter;
 
     public PublicacionesFragment() {
+        adapter = new EventoAdapter();
         fragment = AddPublicacionFragment.newInstance();
     }
 
@@ -39,19 +45,37 @@ public class PublicacionesFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_publicaciones, container, false);
         addBtn = view.findViewById(R.id.addBtn);
+        addBtn2 = view.findViewById(R.id.addBtn2);
         noPublicaciones = view.findViewById(R.id.noPublicaciones);
+
+        publicacionesRecycler = view.findViewById(R.id.publicacionesRecycler);
+        manager = new LinearLayoutManager(view.getContext());
+        publicacionesRecycler.setLayoutManager(manager);
+        publicacionesRecycler.setAdapter(adapter);
+        publicacionesRecycler.setHasFixedSize(true);
 
         addBtn.setOnClickListener(
                 (v)->{
                     listener.addPublicacion(fragment);
                 }
         );
+        addBtn2.setOnClickListener(
+                (v)->{
+                    listener.addPublicacion(fragment);
+                }
+        );
 
+        if(adapter.getItemCount() > 0){
+            noPublicaciones.setVisibility(View.INVISIBLE);
+            addBtn2.setVisibility(View.VISIBLE);
+            addBtn.setVisibility(View.INVISIBLE);
+            publicacionesRecycler.setVisibility(View.VISIBLE);
+        }
         return view;
     }
 
     public void addEvento(Evento evento) {
-
+        adapter.addEvento(evento);
     }
 
     public interface OnAddPublicacion{
@@ -60,5 +84,9 @@ public class PublicacionesFragment extends Fragment {
 
     public void setListener(OnAddPublicacion listener) {
         this.listener = listener;
+    }
+
+    public void setListenerToAddPublicaciones(AddPublicacionFragment.OnEvento listener){
+        fragment.setListener(listener);
     }
 }

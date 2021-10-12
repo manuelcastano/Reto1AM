@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
         perfilFragment.setListener(this);
         editProfileFragment.setListener(this);
         publicacionesFragment.setListener(this);
+        publicacionesFragment.setListenerToAddPublicaciones(this);
+
         showFragment(perfilFragment);
 
         navigator.setOnItemSelectedListener(
