@@ -5,10 +5,13 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,6 +25,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.reto1.databinding.ActivityEscogerUbicacionBinding;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class EscogerUbicacionActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
 
     private GoogleMap mMap;
@@ -29,6 +36,7 @@ public class EscogerUbicacionActivity extends FragmentActivity implements OnMapR
     private LocationManager manager;
     private Marker ubicacion;
     private Button continuarBtn;
+    private String direccion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +59,7 @@ public class EscogerUbicacionActivity extends FragmentActivity implements OnMapR
             Toast.makeText(this, "No has seleccionado la ubicacion del evento", Toast.LENGTH_LONG).show();
         } else{
             Intent databack = new Intent();
-            databack.putExtra("ubicacion", ubicacion.getPosition());
+            databack.putExtra("ubicacion", direccion);
             setResult(RESULT_OK,databack);
             finish();
         }
@@ -82,6 +90,13 @@ public class EscogerUbicacionActivity extends FragmentActivity implements OnMapR
             ubicacion = mMap.addMarker(new MarkerOptions().position(latLng));
         } else{
             ubicacion.setPosition(latLng);
+        }
+        Geocoder g = new Geocoder(this, Locale.getDefault());
+        try {
+            List<Address> addresses = g.getFromLocation(latLng.latitude, latLng.longitude, 1);
+            direccion = addresses.get(0).getAddressLine(0);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

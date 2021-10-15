@@ -33,7 +33,7 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoView>{
         skeleton.getImagenNegocio().setImageURI(evento.getUri());
         skeleton.getNombreEvento().setText(evento.getNombreEvento());
         skeleton.getNombreNegocio().setText(evento.getCompañia());
-        skeleton.getUbicacion().setText(evento.getUbicacion().toString());
+        skeleton.getUbicacion().setText(evento.getUbicacion());
         skeleton.getInicio().setText(evento.getInicio());
         skeleton.getFinalTV().setText(evento.getFin());
     }

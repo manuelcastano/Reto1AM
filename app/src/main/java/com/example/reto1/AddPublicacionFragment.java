@@ -31,7 +31,7 @@ public class AddPublicacionFragment extends Fragment {
     private ActivityResultLauncher<Intent> ubicacion;
     private ImageButton ubicacionBtn;
     private Button crearBtn;
-    private LatLng ubicacionEvento;
+    private String ubicacionEvento;
     private OnEvento listener;
     private EditText nameET, inicioET, finET;
     private TextView hayUbicacionTV;
@@ -88,8 +88,8 @@ public class AddPublicacionFragment extends Fragment {
 
     private void onUbicacionResult(ActivityResult result) {
         if(result.getResultCode() == RESULT_OK){
-            ubicacionEvento = (LatLng) result.getData().getExtras().get("ubicacion");
-            hayUbicacionTV.setText("Ubicacion seleccionada");
+            ubicacionEvento = result.getData().getExtras().get("ubicacion").toString();
+            hayUbicacionTV.setText(ubicacionEvento);
         }
     }
 
