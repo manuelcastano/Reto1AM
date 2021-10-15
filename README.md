@@ -1,5 +1,7 @@
 # Reto1AM
 
-Manuel David Castaño Saldarriaga
-Jhoan David Fiat Restrepo
-Jaime Andrés Mayor Aldana
+##Developed by.
+
+[Manuel David Castaño Saldarriaga](https://github.com/manuelcastano)
+[Jhoan David Fiat Restrepo](https://github.com/DavidFiat)
+[Jaime Andrés Mayor Aldana](https://github.com/AndresMayor)🚀
