@@ -96,15 +96,12 @@ public class EditProfileFragment extends Fragment {
             listener.onProfile(profile);
 
         });
+        uri  = profile.getUri();
 
-        if(profile!=null){
-
-            uri  = profile.getUri();
-
-            binding.descripcionText.setText(profile.getDescription());
-            binding.titleNeg.setText(profile.getTitle());
+        binding.descripcionText.setText(profile.getDescription());
+        binding.titleNeg.setText(profile.getTitle());
+        if(uri != null){
             binding.imgEditBtn.setImageURI(Uri.parse(uri));
-
         }
 
         return view;
