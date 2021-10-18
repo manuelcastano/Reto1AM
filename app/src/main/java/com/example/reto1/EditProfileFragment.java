@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.reto1.databinding.FragmentPerfilEditBinding;
+import com.google.gson.Gson;
 
 import java.io.File;
 
@@ -33,8 +34,9 @@ public class EditProfileFragment extends Fragment {
     private OnProfile listener;
     private ImageButton imgEditBtn;
     private File file;
-    private Uri uri;
+    private String uri;
     private View view;
+    private Profile profile;
 
 
 
@@ -81,7 +83,8 @@ public class EditProfileFragment extends Fragment {
         imgEditBtn.setOnClickListener(this::desicion);
 
         if(uri!=null){
-            imgEditBtn.setImageURI(uri);
+            Uri uri2 = Uri.parse(uri);
+            imgEditBtn.setImageURI(uri2);
         }
         binding.editInfoBtn.setOnClickListener(v->{
 
@@ -93,6 +96,16 @@ public class EditProfileFragment extends Fragment {
             listener.onProfile(profile);
 
         });
+
+        if(profile!=null){
+
+            uri  = profile.getUri();
+
+            binding.descripcionText.setText(profile.getDescription());
+            binding.titleNeg.setText(profile.getTitle());
+            binding.imgEditBtn.setImageURI(Uri.parse(uri));
+
+        }
 
         return view;
     }
@@ -123,8 +136,9 @@ public class EditProfileFragment extends Fragment {
     }
     private  void onGalleryResult(ActivityResult result) {
         if(result.getResultCode() == RESULT_OK){
-          uri = result.getData().getData();
-          imgEditBtn.setImageURI(uri);
+            uri = result.getData().getData().toString();
+
+          imgEditBtn.setImageURI(result.getData().getData());
         }
     }
 
@@ -149,8 +163,9 @@ public class EditProfileFragment extends Fragment {
 
             //97dp,68dp
             //thumbnail = Bitmap.createScaledBitmap(bitmap,bitmap.getWidth()/4,bitmap.getHeight()/4,true);
-            uri = FileProvider.getUriForFile(getContext(),getContext().getPackageName(),file);
-            imgEditBtn.setImageURI(uri);
+            Uri uri2 = FileProvider.getUriForFile(getContext(),getContext().getPackageName(),file);
+            uri = uri2.toString();
+            imgEditBtn.setImageURI(uri2);
            // imgEditBtn.setImageBitmap(thumbnail);
 
         }else if (result.getResultCode()  == RESULT_CANCELED){
@@ -166,5 +181,11 @@ public class EditProfileFragment extends Fragment {
         void onProfile(Profile profile);
     }
 
+    public FragmentPerfilEditBinding getBinding() {
+        return binding;
+    }
 
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
 }

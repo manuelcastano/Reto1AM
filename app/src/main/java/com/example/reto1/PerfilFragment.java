@@ -2,6 +2,7 @@ package com.example.reto1;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.reto1.databinding.FragmentPerfilBinding;
 
@@ -22,6 +25,7 @@ public class PerfilFragment extends Fragment {
 
     private FragmentPerfilBinding binding;
     private OnEditFragment listener;
+    private static PerfilFragment perfilFragment;
 
     //State
     private Profile profile;
@@ -36,14 +40,34 @@ public class PerfilFragment extends Fragment {
     }
 
     public static PerfilFragment newInstance() {
-        PerfilFragment fragment = new PerfilFragment();
+
+        if(perfilFragment == null){
+            perfilFragment = new PerfilFragment();
+        }
         Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        perfilFragment.setArguments(args);
+        return perfilFragment;
     }
 
     public void setProfile(Profile profile) {
         this.profile = profile;
+    }
+
+    @Override
+    public void onResume() {
+
+
+        binding.titlePro.setText(profile.getTitle());
+        binding.descriptionPro.setText(profile.getDescription());
+
+        if(profile.getUri()!= null) {
+            Uri uri = Uri.parse(profile.getUri());
+            binding.imageProfile.setImageURI(uri);
+        }
+
+
+
+        super.onResume();
     }
 
     @Override
@@ -55,7 +79,9 @@ public class PerfilFragment extends Fragment {
 
         binding.editBtn.setOnClickListener(v->{
 
-            listener.onEditFragment();
+
+            listener.onEditFragment(profile);
+
 
         });
 
@@ -68,8 +94,12 @@ public class PerfilFragment extends Fragment {
             binding.imageProfile.setImageBitmap(bitmap);
         }*/
         if (profile.getUri() != null){
-            binding.imageProfile.setImageURI(profile.getUri());
+            String uri = profile.getUri();
+            Uri ur = Uri.parse(uri);
+            binding.imageProfile.setImageURI(ur);
         }
+
+
 
         return view;
     }
@@ -79,6 +109,10 @@ public class PerfilFragment extends Fragment {
     }
 
     public interface OnEditFragment{
-        void onEditFragment();
+        void onEditFragment(Profile profile);
+    }
+
+    public FragmentPerfilBinding getBinding() {
+        return binding;
     }
 }

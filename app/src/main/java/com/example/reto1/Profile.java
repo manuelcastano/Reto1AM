@@ -5,14 +5,15 @@ import android.net.Uri;
 public class Profile {
 
     private String title;
-    private Uri uri;
+    //private Uri uri;
+    private String uri;
     private String description;
 
 
     public Profile(){
 
     }
-    public Profile(String title, String description,Uri uri) {
+    public Profile(String title, String description,String uri) {
         this.title = title;
         this.description = description;
         this.uri = uri;
@@ -30,7 +31,7 @@ public class Profile {
         this.title = title;
     }
 
-    public void setDescription(String description) {
+   /* public void setDescription(String description) {
         this.description = description;
     }
     public Uri getUri() {
@@ -38,6 +39,14 @@ public class Profile {
     }
 
     public void setUri(Uri uri) {
+        this.uri = uri;
+    }*/
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
         this.uri = uri;
     }
 }
