@@ -8,14 +8,19 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.reto1.databinding.FragmentPerfilBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.net.URL;
+import java.time.Clock;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements PerfilFragment.OnEditFragment,PublicacionesFragment.OnAddPublicacion,EditProfileFragment.OnProfile, AddPublicacionFragment.OnEvento {
 
@@ -87,36 +92,30 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
         String json =  preferences.getString("profile","NO_OBJ");
         if(!json.equals("NO_OBJ")){
             Gson gson = new Gson();
-            Toast.makeText(this,json,Toast.LENGTH_LONG).show();
              Profile profile = gson.fromJson(json,Profile.class);
              perfilFragment.setProfile(profile);
-
-
-             /*perfilFragment.getBinding().titlePro.setText(profile.getTitle());
-             perfilFragment.getBinding().descriptionPro.setText(profile.getDescription());
-             if(profile.getUri()!= null) {
-                 Uri uri = Uri.parse(profile.getUri());
-                 perfilFragment.getBinding().imageProfile.setImageURI(uri);
-             }*/
-
-
         }
-
-
+        String jsonEventos =  preferences.getString("eventos","NO_OBJ");
+        Log.e(">>>",jsonEventos);
+        if(!jsonEventos.equals("NO_OBJ")){
+            Gson gson = new Gson();
+            Type type = new TypeToken<ArrayList<Evento>>(){}.getType();
+            ArrayList<Evento> eventos = gson.fromJson(jsonEventos, type);
+            publicacionesFragment.getAdapter().setEventos(eventos);
+        }
         super.onResume();
     }
 
     @Override
     protected void onPause() {
         Profile profile = perfilFragment.getProfile();
-
+        ArrayList<Evento> eventos = publicacionesFragment.getAdapter().getEventos();
         Gson gson = new Gson();
         String json = gson.toJson(profile);
-        //Toast.makeText(this,">>>>"+json,Toast.LENGTH_LONG).show();
+        String jsonEventos = gson.toJson(eventos);
         //Almacenamos en el localStorage =SharedPreferences
         SharedPreferences preferences = getSharedPreferences("MainActivity",MODE_PRIVATE);
-        preferences.edit().putString("profile",json).apply();
-
+        preferences.edit().putString("profile",json).putString("eventos",jsonEventos).apply();
         super.onPause();
     }
 
@@ -124,8 +123,7 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
     public void onEvento(Evento evento) {
         evento.setCompañia(perfilFragment.getProfile().getTitle());
         String uri = perfilFragment.getProfile().getUri();
-        Uri ur = Uri.parse(uri);
-        evento.setUri(ur);
+        evento.setUri(uri);
         publicacionesFragment.addEvento(evento);
         showFragment(publicacionesFragment);
     }

@@ -1,6 +1,5 @@
 package com.example.reto1;
 
-import android.net.Uri;
 
 import java.lang.String;
 import com.google.android.gms.maps.model.Marker;
@@ -12,9 +11,9 @@ public class Evento {
     private String inicio;
     private String fin;
     private String ubicacion;
-    private Uri uri;
+    private String uri;
 
-    public Evento(String compañia, String nombreEvento, String inicio, String fin, String ubicacion, Uri uri) {
+    public Evento(String compañia, String nombreEvento, String inicio, String fin, String ubicacion, String uri) {
         this.compañia = compañia;
         this.nombreEvento = nombreEvento;
         this.inicio = inicio;
@@ -66,11 +65,11 @@ public class Evento {
         this.ubicacion = ubicacion;
     }
 
-    public Uri getUri() {
+    public String getUri() {
         return uri;
     }
 
-    public void setUri(Uri uri) {
+    public void setUri(String uri) {
         this.uri = uri;
     }
 }

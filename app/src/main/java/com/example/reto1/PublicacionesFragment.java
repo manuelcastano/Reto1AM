@@ -39,6 +39,10 @@ public class PublicacionesFragment extends Fragment {
         return fragment;
     }
 
+    public EventoAdapter getAdapter() {
+        return adapter;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

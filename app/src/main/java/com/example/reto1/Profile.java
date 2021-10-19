@@ -11,7 +11,6 @@ public class Profile {
 
 
     public Profile(){
-
     }
     public Profile(String title, String description,String uri) {
         this.title = title;

@@ -37,10 +37,7 @@ public class EditProfileFragment extends Fragment {
     private String uri;
     private View view;
     private Profile profile;
-
-
-
-
+    private int fotos;
 
     //lo utilizamos cuando queremos respuesta de la actividad que lanzamos
     private ActivityResultLauncher<Intent> desicion;
@@ -51,6 +48,7 @@ public class EditProfileFragment extends Fragment {
 
     public EditProfileFragment() {
         // Required empty public constructor
+        fotos = 0;
     }
 
     public static EditProfileFragment newInstance() {
@@ -63,8 +61,6 @@ public class EditProfileFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -81,7 +77,6 @@ public class EditProfileFragment extends Fragment {
         imgEditBtn = binding.imgEditBtn;
 
         imgEditBtn.setOnClickListener(this::desicion);
-
         if(uri!=null){
             Uri uri2 = Uri.parse(uri);
             imgEditBtn.setImageURI(uri2);
@@ -142,8 +137,8 @@ public class EditProfileFragment extends Fragment {
 
     private void openCamera(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        file = new File(getContext().getExternalFilesDir(null)+"/photo.png");
-
+        file = new File(getContext().getExternalFilesDir(null)+"/photo"+ fotos + ".png");
+        fotos++;
         //File -> Uri
         Uri uri = FileProvider.getUriForFile(getContext(),getContext().getPackageName(),file);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);

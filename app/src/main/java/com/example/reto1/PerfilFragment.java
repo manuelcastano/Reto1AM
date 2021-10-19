@@ -1,5 +1,7 @@
 package com.example.reto1;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.reto1.databinding.FragmentPerfilBinding;
+import com.google.gson.Gson;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -36,7 +40,7 @@ public class PerfilFragment extends Fragment {
 
     public PerfilFragment() {
         // Required empty public constructor
-        profile= new Profile("Negocio por defecto","Inserte aquí una descripción apropiada para su negocio. El autor de las publicaciones que haga en el fragmento “publicaciones” será negocio que se registre en este fragment",null);
+        profile= new Profile("Negocio por defecto", "Inserte aquí una descripción apropiada para su negocio. El autor de las publicaciones que haga en el fragmento “publicaciones” será negocio que se registre en este fragment", null);
     }
 
     public static PerfilFragment newInstance() {
@@ -55,18 +59,14 @@ public class PerfilFragment extends Fragment {
 
     @Override
     public void onResume() {
-
-
         binding.titlePro.setText(profile.getTitle());
         binding.descriptionPro.setText(profile.getDescription());
 
         if(profile.getUri()!= null) {
             Uri uri = Uri.parse(profile.getUri());
+            Log.e("Hola:", uri.toString());
             binding.imageProfile.setImageURI(uri);
         }
-
-
-
         super.onResume();
     }
 
