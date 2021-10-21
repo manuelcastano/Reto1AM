@@ -64,7 +64,7 @@ public class PerfilFragment extends Fragment {
 
         if(profile.getUri()!= null) {
             Uri uri = Uri.parse(profile.getUri());
-            Log.e("Hola:", uri.toString());
+            Log.e(">>>", profile.getUri());
             binding.imageProfile.setImageURI(uri);
         }
         super.onResume();

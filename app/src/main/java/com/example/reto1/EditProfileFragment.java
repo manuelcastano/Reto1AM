@@ -26,6 +26,7 @@ import com.example.reto1.databinding.FragmentPerfilEditBinding;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.util.UUID;
 
 
 public class EditProfileFragment extends Fragment {
@@ -37,7 +38,6 @@ public class EditProfileFragment extends Fragment {
     private String uri;
     private View view;
     private Profile profile;
-    private int fotos;
 
     //lo utilizamos cuando queremos respuesta de la actividad que lanzamos
     private ActivityResultLauncher<Intent> desicion;
@@ -48,7 +48,6 @@ public class EditProfileFragment extends Fragment {
 
     public EditProfileFragment() {
         // Required empty public constructor
-        fotos = 0;
     }
 
     public static EditProfileFragment newInstance() {
@@ -137,8 +136,7 @@ public class EditProfileFragment extends Fragment {
 
     private void openCamera(View view) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        file = new File(getContext().getExternalFilesDir(null)+"/photo"+ fotos + ".png");
-        fotos++;
+        file = new File(getContext().getExternalFilesDir(null)+"/"+ UUID.randomUUID().toString() + ".png");
         //File -> Uri
         Uri uri = FileProvider.getUriForFile(getContext(),getContext().getPackageName(),file);
         intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);

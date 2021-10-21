@@ -21,6 +21,9 @@ import android.widget.TextView;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AddPublicacionFragment#newInstance} factory method to
@@ -30,10 +33,10 @@ public class AddPublicacionFragment extends Fragment {
 
     private ActivityResultLauncher<Intent> ubicacion;
     private ImageButton ubicacionBtn;
-    private Button crearBtn;
+    private Button crearBtn, inicioBtn, finalBtn;
     private String ubicacionEvento;
     private OnEvento listener;
-    private EditText nameET, inicioET, finET;
+    private EditText nameET;
     private TextView hayUbicacionTV;
 
     public AddPublicacionFragment() {
@@ -61,14 +64,16 @@ public class AddPublicacionFragment extends Fragment {
         ubicacionBtn.setOnClickListener(this::ubicacionLauncher);
         crearBtn = view.findViewById(R.id.crearBtn);
         nameET = view.findViewById(R.id.nameET);
-        inicioET = view.findViewById(R.id.inicioET);
-        finET = view.findViewById(R.id.finET);
         hayUbicacionTV = view.findViewById(R.id.hayUbicacionTV);
+        inicioBtn = view.findViewById(R.id.inicioBtn);
+        finalBtn = view.findViewById(R.id.finalBtn);
+        inicioBtn.setOnClickListener(this::defineStartDate);
+        finalBtn.setOnClickListener(this::defineEndDate);
         crearBtn.setOnClickListener(
                 (v)->{
                     String name = nameET.getText().toString();
-                    String inicio = inicioET.getText().toString();
-                    String fin = finET.getText().toString();
+                    String inicio = inicioBtn.getText().toString();
+                    String fin = finalBtn.getText().toString();
 
                     Evento evento = new Evento();
                     evento.setNombreEvento(name);
@@ -95,5 +100,28 @@ public class AddPublicacionFragment extends Fragment {
 
     public interface OnEvento{
         void onEvento(Evento evento);
+    }
+
+    private void defineStartDate(View view) {
+        showDatePicker(date->{
+            inicioBtn.setText(formatDate(date));
+        });
+    }
+
+    private String formatDate(long date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+        return sdf.format(new Date(date));
+    }
+
+    private void defineEndDate(View view) {
+        showDatePicker(date -> {
+            finalBtn.setText(formatDate(date));
+        });
+    }
+
+    private void showDatePicker(DateDialogFragment.OnDateSelectedListener listener) {
+        DateDialogFragment dialog = new DateDialogFragment();
+        dialog.setListener(listener);
+        dialog.show(getActivity().getSupportFragmentManager(), "dialog");
     }
 }

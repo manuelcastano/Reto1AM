@@ -90,13 +90,13 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
     protected void onResume() {
         SharedPreferences preferences = getSharedPreferences("MainActivity",MODE_PRIVATE);
         String json =  preferences.getString("profile","NO_OBJ");
+        Log.e("<<<<", json);
         if(!json.equals("NO_OBJ")){
-            Gson gson = new Gson();
+             Gson gson = new Gson();
              Profile profile = gson.fromJson(json,Profile.class);
              perfilFragment.setProfile(profile);
         }
         String jsonEventos =  preferences.getString("eventos","NO_OBJ");
-        Log.e(">>>",jsonEventos);
         if(!jsonEventos.equals("NO_OBJ")){
             Gson gson = new Gson();
             Type type = new TypeToken<ArrayList<Evento>>(){}.getType();

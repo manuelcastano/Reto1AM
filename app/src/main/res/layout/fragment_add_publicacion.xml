@@ -136,43 +136,34 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/inicioET"
-                android:layout_width="123dp"
+            <Button
+                android:id="@+id/inicioBtn"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="32dp"
-                android:background="@drawable/padding_edittext"
-                android:ems="10"
-                android:hint="Inicio"
-                android:inputType="text"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/estilobotones"
+                android:text="Inicio"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/finET"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-            <EditText
-                android:id="@+id/finET"
-                android:layout_width="123dp"
+            <Button
+                android:id="@+id/finalBtn"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="32dp"
-                android:background="@drawable/padding_edittext"
-                android:ems="10"
-                android:hint="Fin"
-                android:inputType="text"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textColorHint="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/inicioET"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/estilobotones"
+                android:text="Final"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/inicioET"
-                app:layout_constraintTop_toTopOf="@+id/inicioET" />
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
@@ -190,5 +181,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout3" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
