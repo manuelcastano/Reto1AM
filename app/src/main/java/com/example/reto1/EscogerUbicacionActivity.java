@@ -60,6 +60,7 @@ public class EscogerUbicacionActivity extends FragmentActivity implements OnMapR
         } else{
             Intent databack = new Intent();
             databack.putExtra("ubicacion", direccion);
+            databack.putExtra("coordenadas", ubicacion.getPosition());
             setResult(RESULT_OK,databack);
             finish();
         }
