@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,12 +22,13 @@ import java.lang.reflect.Type;
 import java.net.URL;
 import java.time.Clock;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements PerfilFragment.OnEditFragment,PublicacionesFragment.OnAddPublicacion,EditProfileFragment.OnProfile, AddPublicacionFragment.OnEvento {
 
     private PerfilFragment perfilFragment;
     private PublicacionesFragment publicacionesFragment;
-    private MapaFragment mapaFragment;
+    private MapsFragment mapFragment;
     private EditProfileFragment editProfileFragment;
     private BottomNavigationView navigator;
 
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
         editProfileFragment = EditProfileFragment.newInstance();
         perfilFragment = PerfilFragment.newInstance();
         publicacionesFragment = PublicacionesFragment.newInstance();
-        mapaFragment = MapaFragment.newInstance();
+        mapFragment = MapsFragment.newInstance();
 
         perfilFragment.setListener(this);
         editProfileFragment.setListener(this);
@@ -55,7 +57,11 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
                     } else if(menuItem.getItemId() == R.id.publicacionesItem){
                         showFragment(publicacionesFragment);
                     } else if(menuItem.getItemId() == R.id.mapaItem){
-                        showFragment(mapaFragment);
+                        mapFragment.setEventos(publicacionesFragment.getEventos());
+                        showFragment(mapFragment);
+
+
+
                     }
                     return true;
                 }

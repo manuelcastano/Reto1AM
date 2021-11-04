@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PublicacionesFragment#newInstance} factory method to
@@ -92,5 +94,9 @@ public class PublicacionesFragment extends Fragment {
 
     public void setListenerToAddPublicaciones(AddPublicacionFragment.OnEvento listener){
         fragment.setListener(listener);
+    }
+
+    public ArrayList<Evento> getEventos(){
+        return adapter.getEventos();
     }
 }
