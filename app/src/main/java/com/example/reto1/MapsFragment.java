@@ -44,7 +44,7 @@ public class MapsFragment extends Fragment {
             for(int i = 0;i<eventos.size();i++){
                 Evento e = eventos.get(i);
                 LatLng mark = new LatLng(e.getCoordenadas().latitude,e.getCoordenadas().longitude);
-                googleMap.addMarker(new MarkerOptions().position(mark).title(e.getNombreEvento()));
+                googleMap.addMarker(new MarkerOptions().position(mark).title(e.getCompañia()));
             }
         }
     };
