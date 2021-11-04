@@ -57,8 +57,13 @@ public class MainActivity extends AppCompatActivity implements PerfilFragment.On
                     } else if(menuItem.getItemId() == R.id.publicacionesItem){
                         showFragment(publicacionesFragment);
                     } else if(menuItem.getItemId() == R.id.mapaItem){
-                        mapFragment.setEventos(publicacionesFragment.getEventos());
-                        showFragment(mapFragment);
+                        if(publicacionesFragment.getEventos().isEmpty()){
+                           Toast toast = Toast.makeText(this,"No Events Added",Toast.LENGTH_LONG);
+                           toast.show();
+                        }else {
+                            mapFragment.setEventos(publicacionesFragment.getEventos());
+                            showFragment(mapFragment);
+                        }
 
 
 

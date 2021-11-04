@@ -32,7 +32,6 @@ public class EventoAdapter extends RecyclerView.Adapter<EventoView>{
     public void onBindViewHolder(@NonNull EventoView skeleton, int position) {
         Evento evento = eventos.get(position);
         skeleton.setEvento(evento);
-        Log.e("Uri:", evento.getUri());
         skeleton.getImagenNegocio().setImageURI(Uri.parse(evento.getUri()));
         skeleton.getNombreEvento().setText(evento.getNombreEvento());
         skeleton.getNombreNegocio().setText(evento.getCompañia());
